@@ -21,7 +21,8 @@ angular.module('myApp.registration', ['ngRoute'])
     };
     $scope.submitted = false;
     $scope.emptyPhoneEmail = false;
-    $scope.resetForm = function() {
+    $scope.resetForm = function($event) {
+        $scope.submitted = false;
         $scope.user = {
             country_code: '',
             first_name: '',
@@ -32,6 +33,7 @@ angular.module('myApp.registration', ['ngRoute'])
             pin: '',
             phone: ''
         };
+        $event.preventDefault();
     };
 
     $scope.submitForm = function(valid) {

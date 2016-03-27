@@ -5,9 +5,9 @@
                 <legend>Form 1</legend>
                 <div class='form-group'>
                     <div class='row'>
-                        <div class='col-sm-12 col-md-12'>
+                        <div class='col-sm-12 col-md-12' ng-class='{"has-error": (registerForm.country_code.$invalid && submitted)}'>
                             <label class='control-label'>Country code</label>
-                            <input class='form-control' type='text' list='code-list' ng-model='user.country_code'>
+                            <input class='form-control' type='text' list='code-list' ng-model='user.country_code' required name='country_code'>
                             <datalist id='code-list'>
                                 <option value='AU'>AU</option>
                                 <option value='US'>US</option>
@@ -15,6 +15,7 @@
                                 <option value='EN'>EN</option>
                                 <option value='VN'>VN</option>
                             </datalist>
+                            <small ng-if="submitted && registerForm.country_code.$error.required" class="help-block">Country code is required.</small>
                         </div>
                     </div>
                 </div>
@@ -39,8 +40,9 @@
                 <div class='form-group'>
                     <div class='row'>
                         <div class='col-sm-12 col-md-14' ng-class='{"has-error": (registerForm.birth_day.$invalid && submitted)}'>
-                            <label class='control-label'>Day of birth</label>
-                            <input type='text' ui-date class='form-control' ng-model='user.birth_day' name='birth_day' />
+                            <label class='control-label'>Birth day</label>
+                            <input type='text' ui-date class='form-control' ng-model='user.birth_day' name='birth_day' required />
+                            <small ng-if="submitted && registerForm.birth_day.$error.required" class="help-block">Birth day is required.</small>
                         </div>
                     </div>
                 </div>
@@ -68,15 +70,16 @@
                     <div class='row'>
                         <div class='col-sm-12 col-md-14' ng-class='{"has-error": (registerForm.pin.$invalid && submitted)}'>
                             <label class='control-label'>PIN</label>
-                            <input ng-pattern="/^\d{4,6}$/" type='text' class='form-control' ng-model='user.pin' name='pin' />
-                            <small ng-if="submitted && registerForm.phone.$error" class="help-block">Pin is invalid.</small>
+                            <input ng-pattern="/^\d{4,6}$/" type='text' class='form-control' ng-model='user.pin' name='pin' required />
+                            <small ng-if="submitted && registerForm.pin.$error.pattern" class="help-block">Pin is invalid.</small>
+                            <small ng-if="submitted && registerForm.pin.$error.required" class="help-block">Pin is required.</small>
                         </div>
                     </div>
                 </div>
                 <div class='form-actions'>
                     <div class='row'>
                         <div class=''>
-                            <button class='btn btn-default' ng-click='resetForm()'>
+                            <button class='btn btn-default' ng-click='resetForm($event)'>
                                 <i class='fa fa-refresh'></i> Reset
                             </button>
                             <button class='btn btn-primary' type='submit'>
