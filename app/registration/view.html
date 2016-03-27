@@ -46,20 +46,21 @@
                 </div>
                 <div class='form-group'>
                     <div class='row'>
-                        <div class='col-sm-12 col-md-14' ng-class='{"has-error": (registerForm.email.$invalid && submitted)}'>
+                        <div class='col-sm-12 col-md-14' ng-class='{"has-error": ((!user.phone && !user.email)  || registerForm.email.$invalid)  && submitted}'>
                             <label class='control-label'>Email</label>
                             <input type='email' required class='form-control' ng-model='user.email' name='email' />
-                            <small ng-if="submitted && registerForm.email.$error.required" class="help-block">Email is required.</small>
+                            <small ng-if="(!user.phone && !user.email) && submitted && !registerForm.email.$error.email" class="help-block">Email or phone is required.</small>
                             <small ng-if="submitted && registerForm.email.$error.email" class="help-block">Invalid email address.</small>
                         </div>
                     </div>
                 </div>
                 <div class='form-group'>
                     <div class='row'>
-                        <div class='col-sm-12 col-md-14' ng-class='{"has-error": (registerForm.phone.$invalid && submitted)}'>
+                        <div class='col-sm-12 col-md-14' ng-class='{"has-error": ((!user.phone && !user.email)  || registerForm.phone.$invalid)  && submitted}'>
                             <label class='control-label'>Phone</label>
-                            <input ng-pattern="/^$|\d{0,9}(\.\d{1,9})?$/" class='form-control' ng-model='user.phone' name='phone' />
-                            <small ng-if="submitted && registerForm.phone.$error" class="help-block">Phone is invalid.</small>
+                            <input ng-pattern="/^$|\(?([0-9]{3})\)?([ .-]?)([0-9]{3})\2([0-9]{4})/" class='form-control' ng-model='user.phone' name='phone' />
+                            <small ng-if="(!user.phone && !user.email) && submitted" class="help-block">Email or phone is required.</small>
+                            <small ng-if="submitted && registerForm.phone.$invalid" class="help-block">Phone is invalid.</small>
                         </div>
                     </div>
                 </div>
@@ -67,7 +68,7 @@
                     <div class='row'>
                         <div class='col-sm-12 col-md-14' ng-class='{"has-error": (registerForm.pin.$invalid && submitted)}'>
                             <label class='control-label'>PIN</label>
-                            <input ng-pattern="/^[0,9]{4,6}$/" type='text' class='form-control' ng-model='user.pin' name='pin' />
+                            <input ng-pattern="/^\d{4,6}$/" type='text' class='form-control' ng-model='user.pin' name='pin' />
                             <small ng-if="submitted && registerForm.phone.$error" class="help-block">Pin is invalid.</small>
                         </div>
                     </div>

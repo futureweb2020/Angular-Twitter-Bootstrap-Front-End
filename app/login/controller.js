@@ -9,6 +9,15 @@ angular.module('myApp.login', ['ngRoute'])
     });
 }])
 
-.controller('LoginCtrl', function() {
+.controller('LoginCtrl', function($scope) {
+	 
+    $scope.user = {
+    	guild: '',
+    	pin: ''
+    };
 
+    $scope.login = function(valid) {
+         
+    };
+    
 });

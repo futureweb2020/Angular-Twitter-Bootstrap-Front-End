@@ -1,5 +1,34 @@
-<p>This is the partial for view 2.</p>
-<p>
-  Showing of 'interpolate' filter:
-  {{ 'Current version is v%VERSION%.' | interpolate }}
-</p>
+<div class='col-md-6 col-sm-12'>
+    <div class='col-md-12'>
+        <form class='form-horizontal' name='registerForm' novalidate ng-submit='login'>
+            <fieldset>
+                <legend>Form 2</legend>
+                 <div class='form-group'>
+                    <div class='row'>
+                        <div class='col-sm-12 col-md-14'>
+                            <label class='control-label'>Guild ....</label>
+                            <input type='text' class='form-control' ng-model='user.guild' name='guild' />
+                        </div>
+                    </div>
+                </div>
+                <div class='form-group'>
+                    <div class='row'>
+                        <div class='col-sm-12 col-md-14'>
+                            <label class='control-label'>PIN</label>
+                            <input type='text' class='form-control' ng-model='user.pin' name='pin' />
+                        </div>
+                    </div>
+                </div>
+                <div class='form-actions'>
+                    <div class='row'>
+                        <div class=''>
+                            <button class='btn btn-primary' type='submit'>
+                                Login
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </fieldset>
+        </form>
+    </div>
+</div>

@@ -8,27 +8,6 @@ angular.module('myApp.registration', ['ngRoute'])
         controller: 'RegistrationCtrl'
     });
 }])
-/*
-.directive("datepicker", function() {
-    return {
-        restrict: "A",
-        require: "ngModel",
-        link: function(scope, elem, attrs, ngModelCtrl) {
-            var updateModel = function(dateText) {
-                scope.$apply(function() {
-                    ngModelCtrl.$setViewValue(dateText);
-                });
-            };
-            var options = {
-                dateFormat: "dd/mm/yy",
-                onSelect: function(dateText) {
-                    updateModel(dateText);
-                }
-            };
-            elem.datepicker(options);
-        }
-    }
-})*/
 .controller('RegistrationCtrl', function($scope) {
     $scope.user = {
         country_code: '',
@@ -41,7 +20,7 @@ angular.module('myApp.registration', ['ngRoute'])
         phone: ''
     };
     $scope.submitted = false;
-
+    $scope.emptyPhoneEmail = false;
     $scope.resetForm = function() {
         $scope.user = {
             country_code: '',
@@ -62,5 +41,5 @@ angular.module('myApp.registration', ['ngRoute'])
         }
         console.log($scope.user);
     };
-    //$('.datepicker').datepicker();
+    
 });
