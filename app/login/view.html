@@ -1,21 +1,25 @@
 <div class='col-md-6 col-sm-12'>
     <div class='col-md-12'>
-        <form class='form-horizontal' name='registerForm' novalidate ng-submit='login'>
+        <form class='form-horizontal' name='loginForm' novalidate ng-submit='login(loginForm)'>
             <fieldset>
                 <legend>Form 2</legend>
                  <div class='form-group'>
                     <div class='row'>
-                        <div class='col-sm-12 col-md-14'>
-                            <label class='control-label'>Guild ....</label>
-                            <input type='text' class='form-control' ng-model='user.guild' name='guild' />
+                        <div class='col-sm-12 col-md-14' ng-class='{"has-error": (loginForm.guild.$invalid && submitted)}'>
+                            <label class='control-label'>Guild</label>
+                            <input ng-pattern="/^$|^[a-zA-Z]{2}-[a-zA-Z]{2}-[a-zA-Z0-9]{9}-[0-9]{1}$/" type='text' class='form-control' ng-model='user.guild' name='guild' placeholder="AU-NW-03NOV1961-1" required/>
+                            <small ng-if="submitted && loginForm.guild.$error.required" class="help-block">Guild is required.</small>
+                            <small ng-if="submitted && loginForm.guild.$error.pattern" class="help-block">Guild is invalid.</small>
                         </div>
                     </div>
                 </div>
                 <div class='form-group'>
                     <div class='row'>
-                        <div class='col-sm-12 col-md-14'>
+                        <div class='col-sm-12 col-md-14' ng-class='{"has-error": (loginForm.pin.$invalid && submitted)}'>
                             <label class='control-label'>PIN</label>
-                            <input type='text' class='form-control' ng-model='user.pin' name='pin' />
+                            <input ng-pattern="/^\d{4,6}$/" type='text' class='form-control' ng-model='user.pin' name='pin' required />
+                            <small ng-if="submitted && loginForm.pin.$error.pattern" class="help-block">Pin is invalid.</small>
+                            <small ng-if="submitted && loginForm.pin.$error.required" class="help-block">Pin is required.</small>
                         </div>
                     </div>
                 </div>

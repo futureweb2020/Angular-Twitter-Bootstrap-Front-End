@@ -7,7 +7,7 @@
                     <div class='row'>
                         <div class='col-sm-12 col-md-12' ng-class='{"has-error": (registerForm.country_code.$invalid && submitted)}'>
                             <label class='control-label'>Country code</label>
-                            <input class='form-control' type='text' list='code-list' ng-model='user.country_code' required name='country_code'>
+                            <input class='form-control' type='text' list='code-list' ng-model='user.country_code' required name='country_code' ng-pattern="/^$|^[a-zA-Z]{2}$/">
                             <datalist id='code-list'>
                                 <option value='AU'>AU</option>
                                 <option value='US'>US</option>
@@ -16,6 +16,7 @@
                                 <option value='VN'>VN</option>
                             </datalist>
                             <small ng-if="submitted && registerForm.country_code.$error.required" class="help-block">Country code is required.</small>
+                            <small ng-if="submitted && registerForm.country_code.$error.pattern" class="help-block">Country code should be 2 characters long .</small>
                         </div>
                     </div>
                 </div>
@@ -48,21 +49,21 @@
                 </div>
                 <div class='form-group'>
                     <div class='row'>
-                        <div class='col-sm-12 col-md-14' ng-class='{"has-error": ((!user.phone && !user.email)  || registerForm.email.$invalid)  && submitted}'>
+                        <div class='col-sm-12 col-md-14' ng-class='{"has-error": ((registerForm.phone.$error.required && registerForm.email.$error.required)  || registerForm.email.$error.email)  && submitted}'>
                             <label class='control-label'>Email</label>
-                            <input type='email' required class='form-control' ng-model='user.email' name='email' />
-                            <small ng-if="(!user.phone && !user.email) && submitted && !registerForm.email.$error.email" class="help-block">Email or phone is required.</small>
+                            <input type='email' required class='form-control' ng-model='user.email' name='email'  required />
+                            <small ng-if="(registerForm.phone.$error.required && registerForm.email.$error.required) && submitted && !registerForm.email.$error.email" class="help-block">Email or phone is required.</small>
                             <small ng-if="submitted && registerForm.email.$error.email" class="help-block">Invalid email address.</small>
                         </div>
                     </div>
                 </div>
                 <div class='form-group'>
                     <div class='row'>
-                        <div class='col-sm-12 col-md-14' ng-class='{"has-error": ((!user.phone && !user.email)  || registerForm.phone.$invalid)  && submitted}'>
+                        <div class='col-sm-12 col-md-14' ng-class='{"has-error": ((registerForm.phone.$error.required && registerForm.email.$error.required)  || registerForm.phone.$error.pattern)  && submitted}'>
                             <label class='control-label'>Phone</label>
-                            <input ng-pattern="/^$|\(?([0-9]{3})\)?([ .-]?)([0-9]{3})\2([0-9]{4})/" class='form-control' ng-model='user.phone' name='phone' />
-                            <small ng-if="(!user.phone && !user.email) && submitted" class="help-block">Email or phone is required.</small>
-                            <small ng-if="submitted && registerForm.phone.$invalid" class="help-block">Phone is invalid.</small>
+                            <input ng-pattern="/^$|^[^a-zA-Z]*$/" class='form-control' ng-model='user.phone' name='phone'  required />
+                            <small ng-if="(registerForm.phone.$error.required && registerForm.email.$error.required) && submitted" class="help-block">Email or phone is required.</small>
+                            <small ng-if="submitted && registerForm.phone.$error.pattern" class="help-block">Phone number should not contain alphabets.</small>
                         </div>
                     </div>
                 </div>
